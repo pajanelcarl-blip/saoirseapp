@@ -1,0 +1,6 @@
+{
+  "name": "Saoirse",
+  "scheme": "Saoirse",
+  "configuration": "Debug",
+  "destination": "generic/platform=iOS Simulator"
+}
