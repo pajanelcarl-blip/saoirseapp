@@ -1,0 +1,38 @@
+name: Build Saoirse iOS App
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build for iOS
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: xcode-select -p
+
+      - name: Build Saoirse
+        run: |
+          xcodebuild \
+            -project Saoirse.xcodeproj \
+            -target Saoirse \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath "$RUNNER_TEMP/DerivedData" \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+      - name: Upload app
+        uses: actions/upload-artifact@v4
+        with:
+          name: Saoirse-iOS-App
+          path: ${{ runner.temp }}/DerivedData/Build/Products/Release-iphoneos/Saoirse.app
+          if-no-files-found: error
