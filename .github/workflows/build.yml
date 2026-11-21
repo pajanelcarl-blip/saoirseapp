@@ -22,7 +22,7 @@ jobs:
         run: |
           xcodebuild \
             -project Saoirse.xcodeproj \
-            -target Saoirse \
+            -scheme Saoirse \
             -configuration Release \
             -sdk iphoneos \
             -destination 'generic/platform=iOS' \
